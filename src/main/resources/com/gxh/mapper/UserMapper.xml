@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxh.mapper.UserMapper">
+
+
+    <sql id="colName">
+        id,user_email,user_imgid,user_name,user_nickname,user_pass
+    </sql>
+
+    <!--    sql查询语句-->
+    <select id="selectAllUser" resultType="com.gxh.entity.UserBean">
+        select <include refid="colName"/> from situ_prj.tb_user ;
+    </select>
+
+    <select id="selectByNameAndPass" resultType="com.gxh.entity.UserBean">
+        select *from situ_prj_02_boot.tb_user where user_nickname=#{name} and user_pass=#{pass};
+    </select>
+
+    <select id="selectPassById" resultType="com.gxh.entity.UserBean">
+        select *from situ_prj_02_boot.tb_user where id=#{id};
+    </select>
+
+    <update id="updataPasswordById">
+        update situ_prj_02_boot.tb_user set user_pass=#{pass} where id=#{id};
+    </update>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into situ_prj_02_boot.tb_user(user_name, user_nickname, user_pass, user_type, user_sex, user_email, user_phone)
+        VALUES(#{user_name},#{user_nickname},#{user_pass},#{user_type},#{user_sex},#{user_email},#{user_phone});
+    </insert>
+
+    <delete id="deleteUser">
+        delete
+        from situ_prj_02_boot.tb_user
+        where id=#{id};
+    </delete>
+
+    <update id="updateUser">
+        update situ_prj_02_boot.tb_user
+        <set>
+            <if test="user_name!=null and user_name!=''">
+                user_name=#{user_name},
+            </if>
+            <if test="user_nickname!=null and user_nickname!=''">
+                user_nickname=#{user_nickname},
+            </if>
+            user_type=#{user_type},
+            user_sex=#{user_sex},
+            <if test="user_email!=null and user_email!=''">
+                user_email=#{user_email},
+            </if>
+            <if test="user_phone!=null and user_phone!=''">
+                user_phone=#{user_phone},
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+
+
+</mapper>
