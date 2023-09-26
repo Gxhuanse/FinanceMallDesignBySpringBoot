@@ -1,0 +1,75 @@
+package com.gxh.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
+
+@Controller
+@RequestMapping("/Common")
+public class CommonController {
+
+    //http://localhost/BootStart/Common/login
+    @RequestMapping("/login")
+    public String userlogin(){
+        return "/AdmUserLogin";
+    }
+
+    @RequestMapping("/logOut")
+    public String logOut(HttpSession session){
+        session.removeAttribute("user");
+        return "redirect:/Common/login";
+    }
+
+    @RequestMapping("/AdmNavHome")
+    public String navHome(){
+        return "home/AdmNavHome";
+    }
+
+    @RequestMapping("/NavIndex")
+    public String NavIndex(){
+        return "home/NavIndex";
+    }
+
+    @RequestMapping("/userList")
+    public String userList(){
+        return "user/userList";
+    }
+
+    @RequestMapping("/userPass")
+    public String userPass(){
+        return "user/userPass";
+    }
+
+    @RequestMapping("/userAdd")
+    public String userAdd(){
+        return "user/userAdd";
+    }
+
+    @RequestMapping("/userinfo")
+    public String userinfo(){
+        return "user/userinfo";
+    }
+
+    @RequestMapping("/categoryList")
+    public String categoryList(){
+        return "category/categoryList";
+    }
+
+    @RequestMapping("/categoryAdd")
+    public String categoryAdd(){
+        return "category/categoryAdd";
+    }
+
+    @RequestMapping("/productList")
+    public String productList(){
+        return "product/productList";
+    }
+
+    @RequestMapping("/productAdd")
+    public String productAdd(){
+        return "product/productAdd";
+    }
+
+
+}
