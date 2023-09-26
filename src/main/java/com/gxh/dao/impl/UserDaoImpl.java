@@ -114,6 +114,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int updateUser(UserBean userBean) {
-        return mapper.updateUser(userBean);
+        return mapper.updateById(userBean);
     }
 }

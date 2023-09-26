@@ -29,7 +29,6 @@ public class UserController {
     @Autowired
     UserService service;
 
-    //http://localhost/BootStart/User/selectByByPageCondition
     @RequestMapping("/selectByByPageCondition")
     public ResponseBean selectByByPageCondition(UserSeletPageConditionDTO userDto){
         ResponseBean responseBean;
@@ -43,7 +42,6 @@ public class UserController {
         }
         return responseBean;
     }
-
 
     @RequestMapping("/userAdd")
     public ResponseBean userAdd(UserAddDTO dto){
@@ -75,7 +73,18 @@ public class UserController {
         return responseBean;
     }
 
-    //http://localhost/BootStart/User/resetPass
+    @RequestMapping("/userUpdata")
+    public ResponseBean userUpdata(UserBean bean){
+        ResponseBean responseBean;
+        int i = service.userUpdate(bean);
+        if (i!=0){
+            responseBean=ResponseBean.ok("修改成功");
+        }else {
+            responseBean=ResponseBean.failed("修改失败");
+        }
+        return responseBean;
+    }
+
     @RequestMapping("/resetPass")
     public ResponseBean resetPass(UserBean bean){
         ResponseBean responseBean;
@@ -91,7 +100,6 @@ public class UserController {
         return responseBean;
     }
 
-    //http://localhost/BootStart/User/updatePass
     @RequestMapping("/updatePass")
     public ResponseBean updatePass(UpdPassDTO dto){
         ResponseBean responseBean=null;
@@ -113,12 +121,14 @@ public class UserController {
     }
 
     @RequestMapping("/updataStatus")
-    public ResponseBean updataStatus(UserBean bean){
+    public ResponseBean updataStatus(UserBean bean,HttpServletRequest request){
         ResponseBean responseBean;
         try {
             int i = service.updateStatus(bean);
-            if (i!=0)
+            if (i!=0){
+                request.getSession().setAttribute("user",bean);
                 responseBean= ResponseBean.ok();
+            }
             else responseBean=ResponseBean.failed("重置失败");
         } catch (Exception e) {
             responseBean=ResponseBean.failed("重置失败err");
@@ -127,7 +137,6 @@ public class UserController {
         return responseBean;
     }
 
-    //http://localhost/BootStart/User/login
     @PostMapping("/login")//用户登录
     public ResponseBean login(LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response){
         String name= loginDTO.getName();
@@ -174,6 +183,5 @@ public class UserController {
             return ResponseBean.failed("验证码错误或未检测到验证码");
         }
     }
-
 
 }

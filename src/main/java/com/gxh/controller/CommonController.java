@@ -46,5 +46,10 @@ public class CommonController {
         return "user/userAdd";
     }
 
+    @RequestMapping("/userinfo")
+    public String userinfo(){
+        return "user/userinfo";
+    }
+
 
 }
