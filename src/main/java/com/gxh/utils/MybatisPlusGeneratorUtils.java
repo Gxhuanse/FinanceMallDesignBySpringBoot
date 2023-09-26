@@ -21,11 +21,12 @@ public class MybatisPlusGeneratorUtils {
         //设置全局配置
         GlobalConfig globalConfig = new GlobalConfig();
 
-        String path="mybatisplus_generator";//项目目录
-        globalConfig.setOutputDir(System.getProperty("user.dir")+"/"+path+"/src/main/java"); //设置代码生成位置
-        globalConfig.setOpen(true); //设置生成完毕后是否打开生成代码所在的目录
+        String path_TEST="generator";//预览目录
+//        globalConfig.setOutputDir(System.getProperty("user.dir")+"/"+path_TEST+"/src/main/java"); //设置代码生成位置
+        globalConfig.setOutputDir(System.getProperty("user.dir")+"/src/main/java"); //设置代码生成位置
+        globalConfig.setOpen(false); //设置生成完毕后是否打开生成代码所在的目录
         globalConfig.setAuthor("gxhuanse"); //设置作者
-        globalConfig.setFileOverride(true); //设置是否覆盖原始生成的文件
+        globalConfig.setFileOverride(false); //设置是否覆盖原始生成的文件
         globalConfig.setMapperName("%sDao"); //设置数据层接口名，%s为占位符，指
         //代模块名称
         globalConfig.setIdType(IdType.ASSIGN_ID); //设置Id生成策略
@@ -37,7 +38,7 @@ public class MybatisPlusGeneratorUtils {
         //二者叠加组成完整路径
         packageInfo.setEntity("entity"); //设置实体类包名
         packageInfo.setMapper("mapper"); //设置数据层包名
-//        packageInfo.setController("controller");//设置控制器包名
+        packageInfo.setController("controller");//设置控制器包名
         autoGenerator.setPackageInfo(packageInfo);
 
         //策略设置
