@@ -51,5 +51,25 @@ public class CommonController {
         return "user/userinfo";
     }
 
+    @RequestMapping("/categoryList")
+    public String categoryList(){
+        return "category/categoryList";
+    }
+
+    @RequestMapping("/categoryAdd")
+    public String categoryAdd(){
+        return "category/categoryAdd";
+    }
+
+    @RequestMapping("/productList")
+    public String productList(){
+        return "product/productList";
+    }
+
+    @RequestMapping("/productAdd")
+    public String productAdd(){
+        return "product/productAdd";
+    }
+
 
 }

@@ -42,7 +42,7 @@
                         <!--用户头像-->
                         <a href="#">
                             <img src="//unpkg.com/outeres@0.0.10/img/layui/icon-v2.png" class="layui-nav-img">
-                            <span th:text="${session.user.userNickname}"></span>
+                            <span th:text="${session?.user?.userNickname}"></span>
                         </a>
                         <!--下拉框-->
                         <dl class="layui-nav-child">
@@ -73,17 +73,17 @@
                             </dl>
                         </li>
                         <li class="layui-nav-item">
-                            <a href="#">银行信息</a>
+                            <a href="#">分类信息</a>
                             <dl class="layui-nav-child">
-                                <dd><a target="workspace" href="html/bank/bankquery.html">银行总览</a></dd>
-                                <dd><a target="workspace" href="html/bank/bankAdd.jsp">银行添加</a></dd>
+                                <dd><a target="workspace" th:href="@{/Common/categoryList}">分类总览</a></dd>
+                                <dd><a target="workspace" th:href="@{/Common/categoryAdd}">分类添加</a></dd>
                             </dl>
                         </li>
                         <li class="layui-nav-item">
-                            <a href="#">银行卡信息</a>
+                            <a href="#">商品信息</a>
                             <dl class="layui-nav-child">
-                                <dd><a target="workspace" href="html/card/cardquery.html" >银行卡总览</a></dd>
-                                <dd><a target="workspace" href="html/card/cardAdd.html">银行卡添加</a></dd>
+                                <dd><a target="workspace" th:href="@{/Common/productList}">商品总览</a></dd>
+                                <dd><a target="workspace" th:href="@{/Common/productAdd}">商品添加</a></dd>
                             </dl>
                         </li>
                         <li class="layui-nav-item">
