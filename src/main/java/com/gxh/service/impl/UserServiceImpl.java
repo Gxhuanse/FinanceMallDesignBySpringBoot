@@ -115,6 +115,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int userDeleteById(Integer id) {
+        return dao.userDeleteById(id);
+    }
+
+    @Override
     public int userDelete(UserBean userBean) {
         return dao.deleteUser(userBean);
     }

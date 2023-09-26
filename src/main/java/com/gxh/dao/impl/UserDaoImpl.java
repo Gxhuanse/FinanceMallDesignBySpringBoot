@@ -99,7 +99,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int insertUser(UserBean userBean) {
-        return mapper.insertUser(userBean);
+        return mapper.insert(userBean);
+    }
+
+    @Override
+    public int userDeleteById(Integer id) {
+        return mapper.deleteById(id);
     }
 
     @Override

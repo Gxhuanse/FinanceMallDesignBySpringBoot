@@ -239,9 +239,9 @@
                             var id=data.id;
                             alert(id)
                             $.ajax({
-                                url:'/stprj/userdeleteServlet?id='+id,
-                                type:'get',
-                                // data:id,
+                                url:'/BootStart/User/userDelete',
+                                type:'post',
+                                data: {id:id},
                                 dataType:'json',
                                 success:function (result){
                                     if (result.code===200){

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>后台管理系统页面</title>
+        <title>银蚂蚁金融商城-后台系统</title>
         <link rel="stylesheet" type="text/css" th:href="@{/css/layui.css}">
         <script type="text/javascript" th:src="@{/js/layui.js}"></script>
         <style>
@@ -42,12 +42,12 @@
                         <!--用户头像-->
                         <a href="#">
                             <img src="//unpkg.com/outeres@0.0.10/img/layui/icon-v2.png" class="layui-nav-img">
-
+                            <span th:text="${session.user.userNickname}"></span>
                         </a>
                         <!--下拉框-->
                         <dl class="layui-nav-child">
                             <dd><a target="workspace" href="#">个人中心</a></dd>
-                            <dd><a target="workspace" href="html/user/updatepassword.jsp">修改密码</a></dd>
+                            <dd><a target="workspace" th:href="@{/Common/userPass}">修改密码</a></dd>
                             <dd><a th:href="@{/Common/logOut}">退出</a></dd>
                         </dl>
                     </li>
@@ -69,7 +69,7 @@
                             <a class="" href="#">用户信息</a>
                             <dl class="layui-nav-child">
                                 <dd><a target="workspace" th:href="@{/Common/userList}">用户总览</a></dd>
-                                <dd><a target="workspace" href="html/user/useradd.html">用户添加</a></dd>
+                                <dd><a target="workspace" th:href="@{/Common/userAdd}">用户添加</a></dd>
                             </dl>
                         </li>
                         <li class="layui-nav-item">

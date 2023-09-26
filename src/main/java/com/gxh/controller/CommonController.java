@@ -26,14 +26,25 @@ public class CommonController {
         return "home/AdmNavHome";
     }
 
+    @RequestMapping("/NavIndex")
+    public String NavIndex(){
+        return "home/NavIndex";
+    }
+
     @RequestMapping("/userList")
     public String userList(){
         return "user/userList";
     }
 
-
-    @RequestMapping("/NavIndex")
-    public String NavIndex(){
-        return "home/NavIndex";
+    @RequestMapping("/userPass")
+    public String userPass(){
+        return "user/userPass";
     }
+
+    @RequestMapping("/userAdd")
+    public String userAdd(){
+        return "user/userAdd";
+    }
+
+
 }

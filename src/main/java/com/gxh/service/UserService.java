@@ -46,5 +46,7 @@ public interface UserService {
 
     int userDelete(UserBean userBean);
 
+    int userDeleteById(Integer id);
+
     int userUpdate(UserBean userBean);
 }

@@ -5,6 +5,7 @@ import com.gxh.entity.UserBean;
 import com.gxh.entity.dto.PageDTO;
 import com.gxh.entity.dto.LoginDTO;
 import com.gxh.entity.dto.user.UpdPassDTO;
+import com.gxh.entity.dto.user.UserAddDTO;
 import com.gxh.entity.dto.user.UserSeletPageConditionDTO;
 import com.gxh.service.UserService;
 import com.gxh.utils.JwtUtils;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 @RestController
@@ -38,6 +40,37 @@ public class UserController {
         } catch (Exception e) {
             responseBean=ResponseBean.failed("查询失败");
             throw new RuntimeException(e);
+        }
+        return responseBean;
+    }
+
+
+    @RequestMapping("/userAdd")
+    public ResponseBean userAdd(UserAddDTO dto){
+        ResponseBean responseBean;
+        if (Objects.equals(dto.getUserNewpass(),dto.getUserRepass())){
+            UserBean bean=dto;
+            bean.setUserPass(dto.getUserRepass());
+            int i = service.addUser(bean);
+            if (i!=0){
+                responseBean=ResponseBean.ok("添加成功");
+            }else {
+                responseBean=ResponseBean.failed("添加失败");
+            }
+        }else {
+            responseBean=ResponseBean.failed("添加失败、两次密码不一致");
+        }
+        return responseBean;
+    }
+
+    @RequestMapping("/userDelete")
+    public ResponseBean userDel(int id){
+        ResponseBean responseBean;
+        int i = service.userDeleteById(id);
+        if (i!=0){
+            responseBean=ResponseBean.ok("删除成功");
+        }else {
+            responseBean=ResponseBean.failed("删除失败");
         }
         return responseBean;
     }
@@ -95,18 +128,15 @@ public class UserController {
     }
 
     //http://localhost/BootStart/User/login
-    @PostMapping("/login")
+    @PostMapping("/login")//用户登录
     public ResponseBean login(LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response){
         String name= loginDTO.getName();
         String pass= loginDTO.getPass();
-
         if (!Pattern.matches("\\S{3,16}",name)
                 ||!Pattern.matches("\\S{3,16}",pass))//校验用户名密码规范性
             return ResponseBean.failed("登录失败,用户名密码不规范");
-
         Object checkCode = request.getSession().getAttribute("rightCode");//获取session中的验证码
         System.out.println("------------>验证码："+checkCode);
-
 //        if (Objects.equals(loginDTO.getCaptcha(),checkCode))//判断验证码是否正确
         if (true)//跳过验证码校验
         {

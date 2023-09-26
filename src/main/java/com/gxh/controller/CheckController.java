@@ -65,7 +65,7 @@ public class CheckController {
                 UserBean userBean = new UserBean();
                 userBean.setUserNickname(u);
                 request.getSession().setAttribute("user",userBean);
-                return "forward:/Common/success";
+                return "forward:/Common/AdmNavHome";
             }else {//jwt非法
                 System.out.println("jwt非法");
                 return "redirect:/Common/login";
