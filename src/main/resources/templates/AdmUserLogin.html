@@ -58,7 +58,7 @@
                 </div>
                 <div class="layui-col-xs5">
                     <div style="margin-left: 10px;">
-                        <img src="http://localhost/BootStart/Check/CaptchaImg/first" onclick="this.src='http://localhost/BootStart/Check/CaptchaImg/'+ new Date().getTime();">
+                        <img src="http://localhost:8080/BootStart/Check/CaptchaImg/first" onclick="this.src='http://localhost:8080/BootStart/Check/CaptchaImg/'+ new Date().getTime();">
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 success:function (result){
                     if (result.code===200){
                         layer.msg("登录成功");
-                        window.location.href="http://localhost/BootStart/Common/AdmNavHome";
+                        window.location.href="http://localhost:8080/BootStart/Common/AdmNavHome";
                     }else {
                         layer.msg(result.msg);
                     }

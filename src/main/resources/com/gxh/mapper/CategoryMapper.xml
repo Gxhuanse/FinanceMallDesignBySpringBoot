@@ -20,10 +20,10 @@
                 <if test="parentId!=null and parentId!=-1">
                     and c1.parent_id=#{parentId}
                 </if>
-                <if test="ctRecom!=null">
+                <if test="ctRecom!=null and ctRecom!=-1">
                     and c1.ct_recom=#{ctRecom}
                 </if>
-                <if test="ctStatus!=null">
+                <if test="ctStatus!=null and ctStatus!=-1">
                     and c1.ct_status=#{ctStatus}
                 </if>
         </where>
@@ -47,10 +47,10 @@
             <if test="parentId!=null and parentId!=-1">
                 and c1.parent_id=#{parentId}
             </if>
-            <if test="ctRecom!=null">
+            <if test="ctRecom!=null and ctRecom!=-1">
                 and c1.ct_recom=#{ctRecom}
             </if>
-            <if test="ctStatus!=null">
+            <if test="ctStatus!=null and ctStatus!=-1">
                 and c1.ct_status=#{ctStatus}
             </if>
         </where>

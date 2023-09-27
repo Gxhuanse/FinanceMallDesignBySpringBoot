@@ -43,6 +43,24 @@
                     </select>
                 </div>
             </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <select name="ctRecom">
+                        <option value="-1">不限推荐</option>
+                        <option value="1">推荐</option>
+                        <option value="0">不推荐</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-input-wrap">
+                    <select name="ctStatus">
+                        <option value="-1">不限状态</option>
+                        <option value="1">上架</option>
+                        <option value="0">下架</option>
+                    </select>
+                </div>
+            </div>
             <div class="layui-btn-container layui-col-xs12">
                 <button class="layui-btn" lay-submit lay-filter="table-search">搜索</button>
                 <button type="reset" class="layui-btn layui-btn-primary">清除</button>
@@ -295,7 +313,7 @@
                     type:'get',
                     dataType:'json',
                     success:function (result){
-                        var html='<option value="-1">所有类</option><option value="0">无父类</option>';
+                        var html='<option value="-1">不限父类</option><option value="0">父类</option>';
                         if (result.code===0){
                             $.each(result.res,function(index, item) {
                                 html +='<option value="'+item.id+'">'+item.ctName+'</option>';
