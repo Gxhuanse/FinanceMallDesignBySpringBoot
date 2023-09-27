@@ -44,7 +44,6 @@
         $=layui.$;
         document.getElementById("ctName").onblur=function (){
             var value = document.getElementById("ctName").value;
-            debugger
             $.ajax({
                 url:'/BootStart/Category/selectCategoryByName',
                 data: {ctName:value},
