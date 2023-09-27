@@ -29,6 +29,10 @@ public class CommonController {
     public String NavIndex(){
         return "home/NavIndex";
     }
+    @RequestMapping("/About")
+    public String About(){
+        return "home/About";
+    }
 
     @RequestMapping("/userList")
     public String userList(){
