@@ -20,7 +20,6 @@ import java.io.IOException;
 public class CheckController {
 
     //生成验证码
-    //http://localhost/BootStart/Check/Img
     @RequestMapping("/CaptchaImg/{time}")
     public void getcheckCode(HttpServletRequest request, HttpServletResponse response, @PathVariable("time") String time){
         //定义图形验证码的长、宽、验证码字符数、干扰元素个数
@@ -44,7 +43,6 @@ public class CheckController {
         }
     }
 
-    //http://localhost/BootStart/Check/LoginJwtCheck
     @RequestMapping("/LoginJwtCheck")
     public String checklog(HttpServletRequest request,HttpServletResponse response){
         Cookie[] cookies = request.getCookies();

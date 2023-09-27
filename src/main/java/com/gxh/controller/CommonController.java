@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/Common")
 public class CommonController {
 
-    //http://localhost/BootStart/Common/login
     @RequestMapping("/login")
     public String userlogin(){
         return "/AdmUserLogin";
