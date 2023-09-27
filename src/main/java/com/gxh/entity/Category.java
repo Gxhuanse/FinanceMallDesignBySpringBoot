@@ -32,32 +32,32 @@ public class Category implements Serializable {
     /**
      * 分类名
      */
-    private String ct_name;
+    private String ctName;
 
     /**
      * 分类描述
      */
-    private String ct_discrip;
+    private String ctDiscrip;
 
     /**
      * 父级分类
      */
-    private Integer parent_id;
+    private Integer parentId;
 
     /**
      * 是否有父级分类 0：无  1：有
      */
-    private Integer parent_flg;
+    private Integer parentFlg;
 
     /**
      * 是否推荐 0：不推荐  1：推荐
      */
-    private Integer ct_recom;
+    private Integer ctRecom;
 
     /**
      * 分类状态 0：下架  1：上架
      */
-    private Integer ct_status;
+    private Integer ctStatus;
 
     /**
      * 逻辑删除，0：未删除，1：已删除

@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gxh.mapper.CategoryDao">
+<mapper namespace="com.gxh.mapper.CategoryMapper">
 
+    <select id="selectPageConditionAndParentName" resultMap="parentName">
+        select c2.ct_name as parentName,c1.*
+        from situ_prj_02_boot.tb_category c1
+        left outer join situ_prj_02_boot.tb_category c2
+        on c1.parent_id=c2.id
+        <where>
+                <if test="true">
+                    and c1.deleted=0
+                </if>
+                <if test="ctName!=null and ctName!=''">
+                    and c1.ct_name like concat('%',#{ctName},'%')
+                </if>
+                <if test="ctDiscrip!=null and ctDiscrip!=''">
+                    and c1.ct_discrip like concat('%',#{ctDiscrip},'%')
+                </if>
+                <if test="parentId!=null and parentId!=-1">
+                    and c1.parent_id=#{parentId}
+                </if>
+                <if test="ctRecom!=null">
+                    and c1.ct_recom=#{ctRecom}
+                </if>
+                <if test="ctStatus!=null">
+                    and c1.ct_status=#{ctStatus}
+                </if>
+        </where>
+        limit #{curr},#{nums};
+    </select>
+    <select id="selectPageConditionAndParentNameCount" resultMap="parentName">
+        select c2.ct_name as parentName,c1.*
+        from situ_prj_02_boot.tb_category c1
+        left outer join situ_prj_02_boot.tb_category c2
+        on c1.parent_id=c2.id
+        <where>
+            <if test="true">
+                and c1.deleted=0
+            </if>
+            <if test="ctName!=null and ctName!=''">
+                and c1.ct_name like concat('%',#{ctName},'%')
+            </if>
+            <if test="ctDiscrip!=null and ctDiscrip!=''">
+                and c1.ct_discrip like concat('%',#{ctDiscrip},'%')
+            </if>
+            <if test="parentId!=null and parentId!=-1">
+                and c1.parent_id=#{parentId}
+            </if>
+            <if test="ctRecom!=null">
+                and c1.ct_recom=#{ctRecom}
+            </if>
+            <if test="ctStatus!=null">
+                and c1.ct_status=#{ctStatus}
+            </if>
+        </where>
+    </select>
+    <resultMap id="categorp" type="com.gxh.entity.Category">
+        <id column="id" property="id"/>
+    </resultMap>
+    <resultMap id="parentName" type="com.gxh.entity.dto.category.CategoryQueryReturnDTO" extends="categorp">
+        <id column="id" property="id"/>
+        <result column="parentName" property="parentCatName"/>
+    </resultMap>
 </mapper>

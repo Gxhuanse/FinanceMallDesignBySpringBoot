@@ -74,10 +74,11 @@ public class UserController {
     }
 
     @RequestMapping("/userUpdata")
-    public ResponseBean userUpdata(UserBean bean){
+    public ResponseBean userUpdata(UserBean bean,HttpServletRequest request){
         ResponseBean responseBean;
         int i = service.userUpdate(bean);
         if (i!=0){
+            request.getSession().setAttribute("user",bean);
             responseBean=ResponseBean.ok("修改成功");
         }else {
             responseBean=ResponseBean.failed("修改失败");

@@ -151,14 +151,14 @@
                     dataType:'json',
                     success:function (result){
                         if (result.code===200){
-                            layer.msg("添加成功");
+                            layer.msg("修改成功");
                         }else {
                             layer.msg(result.msg);
                         }
                         //解放提交按钮
                         $(".layui-btn").removeClass('layui-btn-disabled');
                         $(".layui-btn").removeAttr('disabled');
-
+                        window.parent.location.href="http://localhost/BootStart/Common/AdmNavHome";
                     },
                     error:function (result) {
                         layer.msg(result.msg);
