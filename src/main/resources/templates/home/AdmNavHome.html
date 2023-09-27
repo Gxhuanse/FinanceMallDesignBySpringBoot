@@ -66,6 +66,9 @@
                     <!-- 左侧导航实现区域（可配合layui已有的垂直导航） -->
                     <ul class="layui-nav layui-nav-tree layui-bg-black" lay-filter="test">
                         <li class="layui-nav-item layui-nav-itemed">
+                            <a target="workspace" th:href="@{/Common/NavIndex}">首页</a>
+                        </li>
+                        <li class="layui-nav-item layui-nav-itemed">
                             <a class="" href="#">用户信息</a>
                             <dl class="layui-nav-child">
                                 <dd><a target="workspace" th:href="@{/Common/userList}">用户总览</a></dd>
@@ -93,7 +96,9 @@
                                 <dd><a target="workspace" href="html/tradedoc/tradedocAdd.html">交易档案添加</a></dd>
                             </dl>
                         </li>
-                        <li class="layui-nav-item"><a target="workspace" href="#">关于我们</a></li>
+                        <li class="layui-nav-item">
+                            <a target="workspace" th:href="@{/Common/About}">关于我们</a>
+                        </li>
                     </ul>
                 </div>
             </div>

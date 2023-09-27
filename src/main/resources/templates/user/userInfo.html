@@ -22,13 +22,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">真实姓名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="userName" th:value="${session?.user?.userName}" lay-verify="required" placeholder="请输入真实姓名" autocomplete="off" class="layui-input">
+                    <input type="text"  name="userName" th:value="${session?.user?.userName}" lay-verify="required" placeholder="请输入真实姓名" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">昵称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="userNickname" th:value="${session?.user?.userNickname}" lay-verify="required" placeholder="请输入登录时用户名" autocomplete="off" class="layui-input">
+                    <input type="text" id="userNickname" name="userNickname" th:value="${session?.user?.userNickname}" lay-verify="required" placeholder="请输入登录时用户名" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -59,24 +59,24 @@
                 </div>
             </div>
 
-            <!--        <div class="layui-form-item">-->
-            <!--            <label class="layui-form-label">照片</label>-->
-            <!--            <div class="layui-input-inline">-->
-            <!--                <button type="button" class="layui-btn" id="ID-upload-demo-btn">-->
-            <!--                    <i class="layui-icon layui-icon-upload"></i> 单图片上传-->
-            <!--                </button>-->
-            <!--                <div style="width: 132px;">-->
-            <!--                    <div class="layui-upload-list">-->
-            <!--                        <img class="layui-upload-img" id="ID-upload-demo-img" style="width: 100%; height: 92px;">-->
-            <!--                        <div id="ID-upload-demo-text"></div>-->
-            <!--                    </div>-->
-            <!--                    <div class="layui-progress layui-progress-big" lay-showPercent="yes" lay-filter="filter-demo">-->
-            <!--                        <div class="layui-progress-bar" lay-percent=""></div>-->
-            <!--                    </div>-->
-            <!--                    <input type="hidden" name="photo">-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!--        </div>-->
+            <div class="layui-form-item">
+                <label class="layui-form-label">头像</label>
+                <div class="layui-input-inline">
+                    <button type="button" class="layui-btn" id="ID-upload-demo-btn">
+                        <i class="layui-icon layui-icon-upload"></i> 单图片上传
+                    </button>
+                    <div style="width: 132px;">
+                        <div class="layui-upload-list">
+                            <img class="layui-upload-img" id="ID-upload-demo-img" style="width: 100%; height: 92px;">
+                            <div id="ID-upload-demo-text"></div>
+                        </div>
+                        <div class="layui-progress layui-progress-big" lay-showPercent="yes" lay-filter="filter-demo">
+                            <div class="layui-progress-bar" lay-percent=""></div>
+                        </div>
+                        <input type="hidden" name="userImgid">
+                    </div>
+                </div>
+            </div>
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
@@ -97,7 +97,8 @@
             // 单图片上传
             var uploadInst = upload.render({
                 elem: '#ID-upload-demo-btn',
-                url: '/User/userAdd', // 此处用的是第三方的 http 请求演示，实际使用时改成您自己的上传接口即可。
+                url: '/BootStart/User/userAddImg', // 此处用的是第三方的 http 请求演示，实际使用时改成您自己的上传接口即可。
+                field: 'myFile',
                 before: function(obj){
                     // 预读本地文件示例，不支持ie8
                     obj.preview(function(index, file, result){
@@ -114,7 +115,7 @@
                     }
                     // 上传成功的一些操作
                     // 显示图片
-                    $('[name="photo"]').val(res.src);
+                    $('[name="userImgid"]').val(res.res);
                     $('#ID-upload-demo-text').html(''); // 置空上传失败的状态
                 },
                 error: function(){
@@ -158,7 +159,7 @@
                         //解放提交按钮
                         $(".layui-btn").removeClass('layui-btn-disabled');
                         $(".layui-btn").removeAttr('disabled');
-                        window.parent.location.href="http://localhost/BootStart/Common/AdmNavHome";
+                        // window.parent.location.href="http://localhost:8080/BootStart/Common/AdmNavHome";//跳转至主页面
                     },
                     error:function (result) {
                         layer.msg(result.msg);

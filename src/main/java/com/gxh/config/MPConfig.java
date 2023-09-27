@@ -1,6 +1,7 @@
 package com.gxh.config;
 
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,8 @@ public class MPConfig {
         mpInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
         //乐观锁拦截器
         mpInterceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
+        //防全表更新
+        mpInterceptor.addInnerInterceptor(new BlockAttackInnerInterceptor());
         return mpInterceptor;
     }
 

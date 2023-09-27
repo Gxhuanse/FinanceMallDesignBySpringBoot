@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/Common")
 public class CommonController {
 
-    //http://localhost/BootStart/Common/login
     @RequestMapping("/login")
     public String userlogin(){
         return "/AdmUserLogin";
@@ -29,6 +28,10 @@ public class CommonController {
     @RequestMapping("/NavIndex")
     public String NavIndex(){
         return "home/NavIndex";
+    }
+    @RequestMapping("/About")
+    public String About(){
+        return "home/About";
     }
 
     @RequestMapping("/userList")
@@ -59,6 +62,11 @@ public class CommonController {
     @RequestMapping("/categoryAdd")
     public String categoryAdd(){
         return "category/categoryAdd";
+    }
+
+    @RequestMapping("/categoryUpdata")
+    public String categoryUpdata(){
+        return "category/categoryUpdata";
     }
 
     @RequestMapping("/productList")

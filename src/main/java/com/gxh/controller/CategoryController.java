@@ -1,6 +1,7 @@
 package com.gxh.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gxh.common.ResponseBean;
 import com.gxh.entity.Category;
 import com.gxh.entity.dto.PageDTO;
@@ -70,6 +71,23 @@ public class CategoryController {
         return responseBean;
     }
 
+    @RequestMapping("/selectCategoryByName")
+    public ResponseBean selectCategoryByName(Category category){
+        ResponseBean responseBean;
+        try {
+            LambdaQueryWrapper<Category> wrapper=new LambdaQueryWrapper<>();
+            wrapper.eq(Category::getCtName,category.getCtName());
+            List<Category> list = service.list(wrapper);
+            if (list.isEmpty()){
+                responseBean= ResponseBean.ok();
+            }else responseBean=ResponseBean.failed(500,"此名已重复",list);
+        } catch (Exception e) {
+            responseBean=ResponseBean.failed("查询出错err");
+            throw new RuntimeException(e);
+        }
+        return responseBean;
+    }
+
     @RequestMapping("/categoryAdd")
     public ResponseBean AddCategory(Category category){
         ResponseBean responseBean=null;
@@ -81,6 +99,43 @@ public class CategoryController {
             else responseBean=ResponseBean.failed("添加失败");
         } catch (Exception e) {
             responseBean=ResponseBean.failed("添加失败err");
+            throw new RuntimeException(e);
+        }
+        return responseBean;
+    }
+
+    @RequestMapping("/categoryUpdata")
+    public ResponseBean UpdateCategory(Category category){
+        ResponseBean responseBean=null;
+        try {
+            boolean save = service.updateById(category);
+            if (save){
+                responseBean=ResponseBean.ok("修改成功");
+            }
+            else responseBean=ResponseBean.failed("修改失败");
+        } catch (Exception e) {
+            responseBean=ResponseBean.failed("修改失败err");
+            throw new RuntimeException(e);
+        }
+        return responseBean;
+    }
+
+    @RequestMapping("/categoryDelete")
+    public ResponseBean categoryDelete(Category category){
+        ResponseBean responseBean=null;
+        try {
+            List<Category> categoryList = service.selectCategoryByParentId(category.getId());
+            if (categoryList.isEmpty()){
+                if (true){//todo 判断类别下是否存在商品，判断条件填充
+                    boolean save = service.removeById(category);
+                    if (save){
+                        responseBean=ResponseBean.ok("删除成功");
+                    }
+                    else responseBean=ResponseBean.failed("删除失败");
+                }else responseBean=ResponseBean.failed("修改失败,该类别下存在商品");
+            }else responseBean=ResponseBean.failed("修改失败,该类别下存在子类别");
+        } catch (Exception e) {
+            responseBean=ResponseBean.failed("删除失败err");
             throw new RuntimeException(e);
         }
         return responseBean;

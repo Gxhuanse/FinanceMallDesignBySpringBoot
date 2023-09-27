@@ -9,17 +9,21 @@ import com.gxh.entity.dto.user.UserAddDTO;
 import com.gxh.entity.dto.user.UserSeletPageConditionDTO;
 import com.gxh.service.UserService;
 import com.gxh.utils.JwtUtils;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 @RestController
@@ -57,6 +61,32 @@ public class UserController {
             }
         }else {
             responseBean=ResponseBean.failed("添加失败、两次密码不一致");
+        }
+        return responseBean;
+    }
+
+    @RequestMapping("/userAddImg")
+    public ResponseBean userAddImg(MultipartFile myFile) {
+        ResponseBean responseBean;
+        try {
+            String fileName = myFile.getOriginalFilename();//获取文件名
+            String fileSuffix=fileName.substring(fileName.lastIndexOf("."));//获取文件后缀名
+            String fileSaveName = UUID.randomUUID()+fileSuffix;//生成文件存储的UUID名
+            String savePath=System.getProperty("user.dir")+"/src/main/resources/static/img/upload/"+fileSaveName;//文件存储路径
+
+            try(InputStream inputStream = myFile.getInputStream();
+                FileOutputStream outputStream=new FileOutputStream(savePath)
+            )
+            {
+                IOUtils.copy(inputStream,outputStream);
+                responseBean=ResponseBean.ok(0,fileSaveName);
+            } catch (IOException e) {
+                responseBean=ResponseBean.failed("上传失败");
+                throw new RuntimeException(e);
+            }
+        } catch (RuntimeException e) {
+            responseBean=ResponseBean.failed("上传失败，服务器发生异常");
+            throw new RuntimeException(e);
         }
         return responseBean;
     }
