@@ -21,9 +21,9 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">分类描述</label>
+        <label class="layui-form-label layui-form-text">分类描述</label>
         <div class="layui-input-block">
-            <input type="text" name="ct_discrip" lay-verify="required" placeholder="请输入分类描述" autocomplete="off" class="layui-input">
+            <input type="text" name="ct_discrip" lay-verify="required" placeholder="请输入分类描述" autocomplete="off" class="layui-textarea">
         </div>
     </div>
     <div class="layui-form-item">
@@ -133,7 +133,7 @@
             $(".layui-btn").attr('disabled','disabled');
             // 此处可执行 Ajax 等操作
             $.ajax({
-                url:'/BootStart/User/userAdd',
+                url:'/BootStart/Category/categoryAdd',
                 data:field,
                 type:'post',
                 dataType:'json',
