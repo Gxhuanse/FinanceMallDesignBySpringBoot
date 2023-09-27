@@ -1,6 +1,7 @@
 package com.gxh.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gxh.common.ResponseBean;
 import com.gxh.entity.Category;
 import com.gxh.entity.dto.PageDTO;
@@ -65,6 +66,23 @@ public class CategoryController {
             responseBean= ResponseBean.ok(0,pageInfo);
         } catch (Exception e) {
             responseBean=ResponseBean.failed("查询失败");
+            throw new RuntimeException(e);
+        }
+        return responseBean;
+    }
+
+    @RequestMapping("/selectCategoryByName")
+    public ResponseBean selectCategoryByName(Category category){
+        ResponseBean responseBean;
+        try {
+            LambdaQueryWrapper<Category> wrapper=new LambdaQueryWrapper<>();
+            wrapper.eq(Category::getCtName,category.getCtName());
+            List<Category> list = service.list(wrapper);
+            if (list.isEmpty()){
+                responseBean= ResponseBean.ok();
+            }else responseBean=ResponseBean.failed(500,"此名已重复",list);
+        } catch (Exception e) {
+            responseBean=ResponseBean.failed("查询出错err");
             throw new RuntimeException(e);
         }
         return responseBean;
