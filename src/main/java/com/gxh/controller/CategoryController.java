@@ -86,5 +86,42 @@ public class CategoryController {
         return responseBean;
     }
 
+    @RequestMapping("/categoryUpdata")
+    public ResponseBean UpdateCategory(Category category){
+        ResponseBean responseBean=null;
+        try {
+            boolean save = service.updateById(category);
+            if (save){
+                responseBean=ResponseBean.ok("修改成功");
+            }
+            else responseBean=ResponseBean.failed("修改失败");
+        } catch (Exception e) {
+            responseBean=ResponseBean.failed("修改失败err");
+            throw new RuntimeException(e);
+        }
+        return responseBean;
+    }
+
+    @RequestMapping("/categoryDelete")
+    public ResponseBean categoryDelete(Category category){
+        ResponseBean responseBean=null;
+        try {
+            List<Category> categoryList = service.selectCategoryByParentId(category.getId());
+            if (categoryList.isEmpty()){
+                if (true){//todo 判断类别下是否存在商品，判断条件填充
+                    boolean save = service.removeById(category);
+                    if (save){
+                        responseBean=ResponseBean.ok("删除成功");
+                    }
+                    else responseBean=ResponseBean.failed("删除失败");
+                }else responseBean=ResponseBean.failed("修改失败,该类别下存在商品");
+            }else responseBean=ResponseBean.failed("修改失败,该类别下存在子类别");
+        } catch (Exception e) {
+            responseBean=ResponseBean.failed("删除失败err");
+            throw new RuntimeException(e);
+        }
+        return responseBean;
+    }
+
 }
 
