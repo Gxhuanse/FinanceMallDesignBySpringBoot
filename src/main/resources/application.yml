@@ -54,3 +54,8 @@ mybatis-plus:
 upload:
   path: D:\PORJECT\Prj_IDEA\SiTuPrj_02_Boot\src\main\resources\static\img\upload
 
+#PageHelper配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
