@@ -3,7 +3,7 @@ package com.gxh.service;
 import com.gxh.entity.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.gxh.entity.dto.PageDTO;
-import com.gxh.entity.dto.category.CategorySeletPageConditionDTO;
+import com.gxh.entity.dto.category.CategorySeletPageConditionInDTO;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import java.util.List;
  */
 public interface ICategoryService extends IService<Category> {
 
-    PageDTO selectIserByPageUseCondition(CategorySeletPageConditionDTO dto);
+    PageDTO selectIserByPageUseCondition(CategorySeletPageConditionInDTO dto);
 
-    PageDTO selectByByPageConditionAndParentName(CategorySeletPageConditionDTO dto);
+    PageDTO selectByByPageConditionAndParentName(CategorySeletPageConditionInDTO dto);
 
     List<Category> selectCategoryByParentId(Integer id);
 }

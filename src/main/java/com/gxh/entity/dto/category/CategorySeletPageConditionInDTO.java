@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategorySeletPageConditionDTO extends Category {
+public class CategorySeletPageConditionInDTO extends Category {
     Integer curr;
     Integer nums;
 }

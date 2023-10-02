@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gxh.common.ResponseBean;
 import com.gxh.entity.Category;
 import com.gxh.entity.dto.PageDTO;
-import com.gxh.entity.dto.category.CategorySeletPageConditionDTO;
+import com.gxh.entity.dto.category.CategorySeletPageConditionInDTO;
 import com.gxh.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +31,7 @@ public class CategoryController {
     ICategoryService service;
 
     @RequestMapping("/selectByPageCondition")
-    public ResponseBean selectByByPageCondition(CategorySeletPageConditionDTO dto){
+    public ResponseBean selectByByPageCondition(CategorySeletPageConditionInDTO dto){
         ResponseBean responseBean;
         PageDTO pageInfo = null;
         try {
@@ -58,7 +58,7 @@ public class CategoryController {
     }
 
     @RequestMapping("/selectByByPageConditionAndParentName")
-    public ResponseBean selectByByPageConditionAndParentName(CategorySeletPageConditionDTO dto){
+    public ResponseBean selectByByPageConditionAndParentName(CategorySeletPageConditionInDTO dto){
         ResponseBean responseBean;
         PageDTO pageInfo = null;
         try {

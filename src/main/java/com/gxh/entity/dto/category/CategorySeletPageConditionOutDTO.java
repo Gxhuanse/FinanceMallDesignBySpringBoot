@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryQueryReturnDTO extends Category {
+public class CategorySeletPageConditionOutDTO extends Category {
     String parentCatName;
 }

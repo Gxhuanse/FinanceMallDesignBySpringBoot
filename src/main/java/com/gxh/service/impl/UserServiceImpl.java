@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
         PageDTO pageinfo=new PageDTO();
 
         Long count= (long) dao.selectCount();
-        List list= dao.selectAllUserByPage(page, limit);
+        List<UserBean> list= dao.selectAllUserByPage(page, limit);
 
         pageinfo.setCount(count);
         pageinfo.setList(list);
