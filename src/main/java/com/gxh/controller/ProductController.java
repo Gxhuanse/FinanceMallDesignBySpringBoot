@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2023-09-27
  */
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/Product")
 public class ProductController {
 
     @Autowired

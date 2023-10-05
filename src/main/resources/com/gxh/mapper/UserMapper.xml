@@ -14,6 +14,23 @@
         select <include refid="colName"/> from situ_prj.tb_user ;
     </select>
 
+    <select id="selectUserByPageCondition" resultType="com.gxh.entity.UserBean">
+        select *
+        from situ_prj_02_boot.tb_user
+        <where>
+            <if test="true">and deleted=0</if>
+            <if test="userNickname!=null and userNickname!=''">
+                and user_nickname like concat('%',#{userNickname},'%')
+            </if>
+            <if test="userStatus!=null and userStatus!=-1">
+                and user_status=#{userStatus}
+            </if>
+            <if test="userType!=null and userType!=-1">
+                and user_type=#{userType}
+            </if>
+        </where>
+    </select>
+
     <select id="selectByNameAndPass" resultType="com.gxh.entity.UserBean">
         select *from situ_prj_02_boot.tb_user where user_nickname=#{name} and user_pass=#{pass};
     </select>

@@ -3,6 +3,8 @@ package com.gxh.dao.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gxh.dao.UserDao;
 import com.gxh.entity.UserBean;
 import com.gxh.entity.dto.PageDTO;
@@ -29,27 +31,21 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public PageDTO selectIserByPageUseCondition(UserSeletPageConditionDTO dto) {
-        IPage<UserBean> iPage=new Page<>(dto.getCurr(), dto.getNums());
-        LambdaQueryWrapper<UserBean> wrapper=new LambdaQueryWrapper<>();
 
-        wrapper.like(dto.getUserName()!=null,UserBean::getUserName,dto.getUserName());
-        wrapper.like(dto.getUserNickname()!=null,UserBean::getUserNickname,dto.getUserNickname());
-        wrapper.like(dto.getUserStatus()!=null,UserBean::getUserStatus,dto.getUserStatus());
-        wrapper.like(dto.getUserType()!=null,UserBean::getUserType,dto.getUserType());
-        wrapper.like(dto.getUserSex()!=null,UserBean::getUserSex,dto.getUserSex());
-        wrapper.like(dto.getUserEmail()!=null,UserBean::getUserEmail,dto.getUserEmail());
-        wrapper.like(dto.getUserPhone()!=null,UserBean::getUserPhone,dto.getUserPhone());
-        mapper.selectPage(iPage,wrapper);
+        PageDTO pagedto=new PageDTO();
 
-        PageDTO pageinfo=new PageDTO();
+        PageHelper.startPage(dto.getCurr(),dto.getNums());
 
-        Long count= iPage.getTotal();
-        List<UserBean> userBeanList=iPage.getRecords();
+        List<UserBean> userBeanList = mapper.selectUserByPageCondition(dto);
 
-        pageinfo.setCount(count);
-        pageinfo.setList(userBeanList);
-        return pageinfo;
+        PageInfo<UserBean> pageInfo=new PageInfo<>(userBeanList);
+
+        pagedto.setCount(pageInfo.getTotal());
+        pagedto.setList(pageInfo.getList());
+        return pagedto;
     }
+
+
 
     @Override
     public PageDTO selectByPageUseMybatisPlusReturnPage(int page, int limit) {
