@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserSeletPageConditionDTO extends UserBean {
+public class UserSeletPageConditionInDTO extends UserBean {
     Integer curr;
     Integer nums;
 }

@@ -21,5 +21,4 @@ public interface CategoryMapper extends BaseMapper<Category> {
 
     List<CategorySeletPageConditionOutDTO> selectPageConditionAndParentName(CategorySeletPageConditionInDTO dto);
 
-    List<CategorySeletPageConditionOutDTO> selectPageConditionAndParentNameCount(CategorySeletPageConditionInDTO dto);
 }

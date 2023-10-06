@@ -1,12 +1,13 @@
 package com.gxh.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.gxh.entity.UserBean;
 import com.gxh.entity.dto.PageDTO;
-import com.gxh.entity.dto.user.UserSeletPageConditionDTO;
+import com.gxh.entity.dto.user.UserSeletPageConditionInDTO;
 
 import java.util.List;
 
-public interface UserService {
+public interface IUserService extends IService<UserBean> {
 
     /**
      * 登录验证功能，
@@ -20,7 +21,7 @@ public interface UserService {
 
     PageDTO selectByPageUseMybatisPlusReturnPage(int page, int limit);
 
-    PageDTO selectIserByPageUseCondition(UserSeletPageConditionDTO dto);
+    PageDTO selectIserByPageUseCondition(UserSeletPageConditionInDTO dto);
 
     List<UserBean> queryAllUser();
 
@@ -42,7 +43,7 @@ public interface UserService {
 
     PageDTO selectUserForPage(int page, int limit);
 
-    int addUser(UserBean userBean);
+    int UserAdd(UserBean userBean);
 
     int userDelete(UserBean userBean);
 

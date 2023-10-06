@@ -1,11 +1,8 @@
 package com.gxh.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.gxh.dao.CategoryDao;
 import com.gxh.entity.Category;
 import com.gxh.entity.dto.PageDTO;
-import com.gxh.entity.dto.category.CategorySeletPageConditionOutDTO;
 import com.gxh.entity.dto.category.CategorySeletPageConditionInDTO;
 import com.gxh.mapper.CategoryMapper;
 import com.gxh.service.ICategoryService;
@@ -27,48 +24,15 @@ import java.util.List;
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements ICategoryService {
 
     @Autowired
-    CategoryMapper categoryMapper;
-
+    CategoryDao categoryDao;
 
     @Override
     public List<Category> selectCategoryByParentId(Integer id) {
-        LambdaQueryWrapper<Category> wrapper=new LambdaQueryWrapper<>();
-        wrapper.eq(Category::getParentId,id);
-        return categoryMapper.selectList(wrapper);
-    }
-
-    @Override
-    public PageDTO selectIserByPageUseCondition(CategorySeletPageConditionInDTO dto) {
-        IPage<Category> iPage=new Page<>(dto.getCurr(),dto.getNums());
-        LambdaQueryWrapper<Category> wrapper=new LambdaQueryWrapper<>();
-
-        wrapper.like(dto.getCtName()!=null,Category::getCtName,dto.getCtName());
-        wrapper.like(dto.getCtDiscrip()!=null,Category::getCtDiscrip,dto.getCtDiscrip());
-        wrapper.eq(dto.getParentId()!=null,Category::getParentId,dto.getParentId());
-        wrapper.eq(dto.getCtRecom()!=null,Category::getCtRecom,dto.getCtRecom());
-        wrapper.eq(dto.getCtStatus()!=null,Category::getCtStatus,dto.getCtStatus());
-
-        categoryMapper.selectPage(iPage,wrapper);
-
-        PageDTO pageInfo=new PageDTO();
-        Long count=iPage.getTotal();
-        List<Category> categoryList=iPage.getRecords();
-
-        pageInfo.setCount(count);
-        pageInfo.setList(categoryList);
-
-        return pageInfo;
+        return categoryDao.selectCategoryByParentId(id);
     }
 
     @Override
     public PageDTO selectByByPageConditionAndParentName(CategorySeletPageConditionInDTO dto) {
-        PageDTO pageInfo=new PageDTO();
-        dto.setCurr((dto.getCurr()-1)*dto.getNums());
-
-        int size = categoryMapper.selectPageConditionAndParentNameCount(dto).size();
-        List<CategorySeletPageConditionOutDTO> dtoList= categoryMapper.selectPageConditionAndParentName(dto);
-        pageInfo.setCount((long) size);
-        pageInfo.setList(dtoList);
-        return pageInfo;
+        return categoryDao.selectByByPageConditionAndParentName(dto);
     }
 }

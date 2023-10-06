@@ -31,28 +31,10 @@
         </where>
     </select>
 
-    <select id="selectByNameAndPass" resultType="com.gxh.entity.UserBean">
-        select *from situ_prj_02_boot.tb_user where user_nickname=#{name} and user_pass=#{pass};
-    </select>
-
-    <select id="selectPassById" resultType="com.gxh.entity.UserBean">
-        select *from situ_prj_02_boot.tb_user where id=#{id};
-    </select>
-
-    <update id="updataPasswordById">
-        update situ_prj_02_boot.tb_user set user_pass=#{pass} where id=#{id};
-    </update>
-
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
         insert into situ_prj_02_boot.tb_user(user_name, user_nickname, user_pass, user_type, user_sex, user_email, user_phone)
         VALUES(#{user_name},#{user_nickname},#{user_pass},#{user_type},#{user_sex},#{user_email},#{user_phone});
     </insert>
-
-    <delete id="deleteUser">
-        delete
-        from situ_prj_02_boot.tb_user
-        where id=#{id};
-    </delete>
 
     <update id="updateUser">
         update situ_prj_02_boot.tb_user

@@ -1,7 +1,9 @@
 package com.gxh.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.gxh.dao.ProductDao;
 import com.gxh.entity.Product;
 import com.gxh.entity.dto.PageDTO;
 import com.gxh.entity.dto.product.ProductSelectPageConditionInDTO;
@@ -12,6 +14,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Wrapper;
 import java.util.List;
 
 /**
@@ -26,23 +29,15 @@ import java.util.List;
 public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> implements IProductService {
 
     @Autowired
-    ProductMapper productMapper;
+    ProductDao productDao;
 
     @Override
     public PageDTO selectProductByPageCondition(ProductSelectPageConditionInDTO dto) {
-        PageDTO pageDto=new PageDTO();
-
-        PageHelper.startPage(dto.getCurr(),dto.getNums());
-
-        List<ProductSelectPageConditionOutDTO> dtoList = productMapper.selectProductByPageCondition(dto);
-
-        PageInfo<ProductSelectPageConditionOutDTO> pageInfo=new PageInfo<>(dtoList);
-
-        pageDto.setCount(pageInfo.getTotal());
-        pageDto.setList(pageInfo.getList());
-        return pageDto;
+        return productDao.selectProductByPageCondition(dto);
     }
 
-
-
+    @Override
+    public int updataStatus(Product product) {
+        return 0;
+    }
 }

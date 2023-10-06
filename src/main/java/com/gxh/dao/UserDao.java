@@ -2,7 +2,7 @@ package com.gxh.dao;
 
 import com.gxh.entity.UserBean;
 import com.gxh.entity.dto.PageDTO;
-import com.gxh.entity.dto.user.UserSeletPageConditionDTO;
+import com.gxh.entity.dto.user.UserSeletPageConditionInDTO;
 
 import java.util.List;
 
@@ -17,9 +17,11 @@ public interface UserDao {
 
     int updateStatus(UserBean bean);
 
-    PageDTO selectIserByPageUseCondition(UserSeletPageConditionDTO dto);
+    PageDTO selectUserByPageUseCondition(UserSeletPageConditionInDTO dto);
 
     PageDTO selectByPageUseMybatisPlusReturnPage(int page, int limit);
+
+    PageDTO selectUserForPage(int page, int limit);
 
     int selectCount();
 
