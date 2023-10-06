@@ -54,6 +54,11 @@ public class CommonController {
         return "user/userinfo";
     }
 
+    @RequestMapping("/userUpdata")
+    public String userUpdata(){
+        return "user/userUpdata";
+    }
+
     @RequestMapping("/categoryList")
     public String categoryList(){
         return "category/categoryList";
