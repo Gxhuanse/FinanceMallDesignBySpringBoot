@@ -58,7 +58,7 @@
     <resultMap id="categorp" type="com.gxh.entity.Category">
         <id column="id" property="id"/>
     </resultMap>
-    <resultMap id="parentName" type="com.gxh.entity.dto.category.CategoryQueryReturnDTO" extends="categorp">
+    <resultMap id="parentName" type="com.gxh.entity.dto.category.CategorySeletPageConditionOutDTO" extends="categorp">
         <id column="id" property="id"/>
         <result column="parentName" property="parentCatName"/>
     </resultMap>

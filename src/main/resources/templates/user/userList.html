@@ -181,7 +181,7 @@
                             title: '编辑 - id:'+ data.id,
                             type: 2,
                             area: ['80%','80%'],
-                            content: 'userupdate.html',
+                            content: '/BootStart/Common/userUpdata',
                             end:function (){tb_user.reload('user_filter');}//重新加载表格
                         });break;
                         case 'forb':layer.confirm('确认'+(data.userStatus?"禁":"启")+'用该用户 [id: '+ data.userNickname +'] 么',{icon:3,title:'提示'}, function(index){

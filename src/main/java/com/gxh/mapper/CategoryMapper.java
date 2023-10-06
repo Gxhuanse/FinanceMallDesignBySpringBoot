@@ -2,8 +2,8 @@ package com.gxh.mapper;
 
 import com.gxh.entity.Category;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.gxh.entity.dto.category.CategoryQueryReturnDTO;
-import com.gxh.entity.dto.category.CategorySeletPageConditionDTO;
+import com.gxh.entity.dto.category.CategorySeletPageConditionOutDTO;
+import com.gxh.entity.dto.category.CategorySeletPageConditionInDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
 @Mapper
 public interface CategoryMapper extends BaseMapper<Category> {
 
-    List<CategoryQueryReturnDTO> selectPageConditionAndParentName(CategorySeletPageConditionDTO dto);
+    List<CategorySeletPageConditionOutDTO> selectPageConditionAndParentName(CategorySeletPageConditionInDTO dto);
 
-    List<CategoryQueryReturnDTO> selectPageConditionAndParentNameCount(CategorySeletPageConditionDTO dto);
+    List<CategorySeletPageConditionOutDTO> selectPageConditionAndParentNameCount(CategorySeletPageConditionInDTO dto);
 }

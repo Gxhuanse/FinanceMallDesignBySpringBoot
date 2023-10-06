@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gxh.entity.Category;
 import com.gxh.entity.dto.PageDTO;
-import com.gxh.entity.dto.category.CategoryQueryReturnDTO;
-import com.gxh.entity.dto.category.CategorySeletPageConditionDTO;
+import com.gxh.entity.dto.category.CategorySeletPageConditionOutDTO;
+import com.gxh.entity.dto.category.CategorySeletPageConditionInDTO;
 import com.gxh.mapper.CategoryMapper;
 import com.gxh.service.ICategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -38,7 +38,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     }
 
     @Override
-    public PageDTO selectIserByPageUseCondition(CategorySeletPageConditionDTO dto) {
+    public PageDTO selectIserByPageUseCondition(CategorySeletPageConditionInDTO dto) {
         IPage<Category> iPage=new Page<>(dto.getCurr(),dto.getNums());
         LambdaQueryWrapper<Category> wrapper=new LambdaQueryWrapper<>();
 
@@ -61,12 +61,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     }
 
     @Override
-    public PageDTO selectByByPageConditionAndParentName(CategorySeletPageConditionDTO dto) {
+    public PageDTO selectByByPageConditionAndParentName(CategorySeletPageConditionInDTO dto) {
         PageDTO pageInfo=new PageDTO();
         dto.setCurr((dto.getCurr()-1)*dto.getNums());
 
         int size = categoryMapper.selectPageConditionAndParentNameCount(dto).size();
-        List<CategoryQueryReturnDTO> dtoList= categoryMapper.selectPageConditionAndParentName(dto);
+        List<CategorySeletPageConditionOutDTO> dtoList= categoryMapper.selectPageConditionAndParentName(dto);
         pageInfo.setCount((long) size);
         pageInfo.setList(dtoList);
         return pageInfo;

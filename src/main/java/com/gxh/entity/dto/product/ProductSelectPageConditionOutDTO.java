@@ -1,17 +1,15 @@
-package com.gxh.entity.dto.category;
+package com.gxh.entity.dto.product;
 
-import com.gxh.entity.Category;
+import com.gxh.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategorySeletPageConditionDTO extends Category {
-    Integer curr;
-    Integer nums;
+public class ProductSelectPageConditionOutDTO extends Product {
+    String productCatName;
 }
