@@ -1,10 +1,12 @@
 package com.gxh.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gxh.dao.UserDao;
 import com.gxh.entity.UserBean;
 import com.gxh.entity.dto.PageDTO;
-import com.gxh.entity.dto.user.UserSeletPageConditionDTO;
-import com.gxh.service.UserService;
+import com.gxh.entity.dto.user.UserSeletPageConditionInDTO;
+import com.gxh.mapper.UserMapper;
+import com.gxh.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +15,16 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class IUserServiceImpl extends ServiceImpl<UserMapper,UserBean> implements IUserService {
 
     @Autowired
-    UserDao dao;
+    UserDao userDao;
 
     @Override
     public int loginToCode(String name, String pass) {
         UserBean bean;
         try {
-            bean= dao.selectByNameAndPass(name, pass);
+            bean= userDao.selectByNameAndPass(name, pass);
         } catch (Exception e) {
             return -1;//出现异常
         }
@@ -38,28 +40,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PageDTO selectByPageUseMybatisPlusReturnPage(int page, int limit) {
-        return dao.selectByPageUseMybatisPlusReturnPage(page, limit);
+        return userDao.selectByPageUseMybatisPlusReturnPage(page, limit);
     }
 
     @Override
-    public PageDTO selectIserByPageUseCondition(UserSeletPageConditionDTO dto) {
-        return dao.selectIserByPageUseCondition(dto);
+    public PageDTO selectIserByPageUseCondition(UserSeletPageConditionInDTO dto) {
+        return userDao.selectUserByPageUseCondition(dto);
     }
 
     @Override
     public UserBean selectById(Integer id) {
-        return dao.selectPassById(id);
+        return userDao.selectPassById(id);
     }
 
     @Override
     public UserBean loginToBean(String name, String pass) {
-        return dao.selectByNameAndPass(name, pass);
+        return userDao.selectByNameAndPass(name, pass);
     }
 
     @Override
     public List<UserBean> queryAllUser() {
-        System.out.println("UserServiceImpl的queryAllUser被调用");
-        return dao.selectAllUser();
+        return userDao.selectAllUser();
     }
 
     @Override
@@ -67,11 +68,11 @@ public class UserServiceImpl implements UserService {
         if (!Pattern.matches("\\S{3,16}",newpass)) {
             return 4;//新密码格式不规范
         }
-        UserBean bean = dao.selectPassById(id);//查询该用户信息
+        UserBean bean = userDao.selectPassById(id);//查询该用户信息
         if (Objects.equals(newpass,repass)){//验证两次新密码是否相同
             if (Objects.equals(bean.getUserPass(),oldpass)){//验证旧密码是否正确
                 if (!Objects.equals(oldpass,newpass)){//判断新旧密码是否相同
-                    if(dao.updataPasswordById(id, newpass)!=0){//进行密码修改并判断修改情况
+                    if(userDao.updataPasswordById(id, newpass)!=0){//进行密码修改并判断修改情况
                         return 0;//修改成功
                     }else {
                         return -1;//修改失败
@@ -89,43 +90,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int resetPass(int id, String pass) {
-        return dao.updataPasswordById(id, pass);
+        return userDao.updataPasswordById(id, pass);
     }
 
     @Override
     public int updateStatus(UserBean bean) {
-        return dao.updateStatus(bean);
+        return userDao.updateStatus(bean);
     }
 
     @Override
     public PageDTO selectUserForPage(int page, int limit) {
-        PageDTO pageinfo=new PageDTO();
-
-        Long count= (long) dao.selectCount();
-        List<UserBean> list= dao.selectAllUserByPage(page, limit);
-
-        pageinfo.setCount(count);
-        pageinfo.setList(list);
-        return pageinfo;
+        return userDao.selectUserForPage(page, limit);
     }
 
     @Override
-    public int addUser(UserBean userBean) {
-        return dao.insertUser(userBean);
+    public int UserAdd(UserBean userBean) {
+        return userDao.insertUser(userBean);
     }
 
     @Override
     public int userDeleteById(Integer id) {
-        return dao.userDeleteById(id);
+        return userDao.userDeleteById(id);
     }
 
     @Override
     public int userDelete(UserBean userBean) {
-        return dao.deleteUser(userBean);
+        return userDao.deleteUser(userBean);
     }
 
     @Override
     public int userUpdate(UserBean userBean) {
-        return dao.updateUser(userBean);
+        return userDao.updateUser(userBean);
     }
 }

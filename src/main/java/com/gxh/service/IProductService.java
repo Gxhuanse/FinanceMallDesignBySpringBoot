@@ -15,4 +15,6 @@ import com.gxh.entity.dto.product.ProductSelectPageConditionInDTO;
  */
 public interface IProductService extends IService<Product> {
     PageDTO selectProductByPageCondition(ProductSelectPageConditionInDTO dto);
+
+    int updataStatus(Product product);
 }

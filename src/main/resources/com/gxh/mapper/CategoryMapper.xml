@@ -27,33 +27,6 @@
                     and c1.ct_status=#{ctStatus}
                 </if>
         </where>
-        limit #{curr},#{nums};
-    </select>
-    <select id="selectPageConditionAndParentNameCount" resultMap="parentName">
-        select c2.ct_name as parentName,c1.*
-        from situ_prj_02_boot.tb_category c1
-        left outer join situ_prj_02_boot.tb_category c2
-        on c1.parent_id=c2.id
-        <where>
-            <if test="true">
-                and c1.deleted=0
-            </if>
-            <if test="ctName!=null and ctName!=''">
-                and c1.ct_name like concat('%',#{ctName},'%')
-            </if>
-            <if test="ctDiscrip!=null and ctDiscrip!=''">
-                and c1.ct_discrip like concat('%',#{ctDiscrip},'%')
-            </if>
-            <if test="parentId!=null and parentId!=-1">
-                and c1.parent_id=#{parentId}
-            </if>
-            <if test="ctRecom!=null and ctRecom!=-1">
-                and c1.ct_recom=#{ctRecom}
-            </if>
-            <if test="ctStatus!=null and ctStatus!=-1">
-                and c1.ct_status=#{ctStatus}
-            </if>
-        </where>
     </select>
     <resultMap id="categorp" type="com.gxh.entity.Category">
         <id column="id" property="id"/>

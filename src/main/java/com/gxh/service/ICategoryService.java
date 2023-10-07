@@ -17,8 +17,6 @@ import java.util.List;
  */
 public interface ICategoryService extends IService<Category> {
 
-    PageDTO selectIserByPageUseCondition(CategorySeletPageConditionInDTO dto);
-
     PageDTO selectByByPageConditionAndParentName(CategorySeletPageConditionInDTO dto);
 
     List<Category> selectCategoryByParentId(Integer id);

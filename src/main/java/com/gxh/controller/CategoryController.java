@@ -1,6 +1,5 @@
 package com.gxh.controller;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gxh.common.ResponseBean;
 import com.gxh.entity.Category;
@@ -29,20 +28,6 @@ public class CategoryController {
 
     @Autowired
     ICategoryService service;
-
-    @RequestMapping("/selectByPageCondition")
-    public ResponseBean selectByByPageCondition(CategorySeletPageConditionInDTO dto){
-        ResponseBean responseBean;
-        PageDTO pageInfo = null;
-        try {
-            pageInfo = service.selectIserByPageUseCondition(dto);
-            responseBean= ResponseBean.ok(0,pageInfo);
-        } catch (Exception e) {
-            responseBean=ResponseBean.failed("查询失败");
-            throw new RuntimeException(e);
-        }
-        return responseBean;
-    }
 
     @RequestMapping("/selectCategoryByParentId/{id}")
     public ResponseBean selectCategoryByParentId(@PathVariable Integer id){

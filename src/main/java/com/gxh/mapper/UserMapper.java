@@ -2,11 +2,8 @@ package com.gxh.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gxh.entity.UserBean;
-import com.gxh.entity.dto.user.UserSeletPageConditionDTO;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.gxh.entity.dto.user.UserSeletPageConditionInDTO;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -15,13 +12,16 @@ public interface UserMapper extends BaseMapper<UserBean> {
 
     List<UserBean> selectAllUser();
 
+    List<UserBean> selectUserByPageCondition(UserSeletPageConditionInDTO dto);
+
+    @Select("select *from situ_prj_02_boot.tb_user where user_nickname=#{name} and user_pass=#{pass}")
     UserBean selectByNameAndPass(@Param("name") String name, @Param("pass") String pass);
 
+    @Update("update situ_prj_02_boot.tb_user set user_pass=#{pass} where id=#{id}")
     int updataPasswordById(@Param("id") int id, @Param("pass") String pass);
 
+    @Select(" select *from situ_prj_02_boot.tb_user where id=#{id};")
     UserBean selectPassById(int id);
-
-    List<UserBean> selectUserByPageCondition(UserSeletPageConditionDTO dto);
 
     @Update("update situ_prj_02_boot.tb_user set user_status=#{userStatus} where id=#{id}")
     int updateStatus(UserBean bean);
@@ -34,6 +34,7 @@ public interface UserMapper extends BaseMapper<UserBean> {
 
     int insertUser(UserBean userBean);
 
+    @Delete("delete from situ_prj_02_boot.tb_user where id=#{id}")
     int deleteUser(UserBean userBean);
 
     int updateUser(UserBean userBean);

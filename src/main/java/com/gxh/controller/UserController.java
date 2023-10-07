@@ -6,8 +6,8 @@ import com.gxh.entity.dto.PageDTO;
 import com.gxh.entity.dto.LoginDTO;
 import com.gxh.entity.dto.user.UpdPassDTO;
 import com.gxh.entity.dto.user.UserAddDTO;
-import com.gxh.entity.dto.user.UserSeletPageConditionDTO;
-import com.gxh.service.UserService;
+import com.gxh.entity.dto.user.UserSeletPageConditionInDTO;
+import com.gxh.service.IUserService;
 import com.gxh.utils.JwtUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,10 @@ import java.util.regex.Pattern;
 public class UserController {
 
     @Autowired
-    UserService service;
+    IUserService service;
 
     @RequestMapping("/selectByByPageCondition")
-    public ResponseBean selectByByPageCondition(UserSeletPageConditionDTO userDto){
+    public ResponseBean selectByByPageCondition(UserSeletPageConditionInDTO userDto){
         ResponseBean responseBean;
         PageDTO pageInfo = null;
         try {
@@ -53,7 +53,7 @@ public class UserController {
         if (Objects.equals(dto.getUserNewpass(),dto.getUserRepass())){
             UserBean bean=dto;
             bean.setUserPass(dto.getUserRepass());
-            int i = service.addUser(bean);
+            int i = service.UserAdd(bean);
             if (i!=0){
                 responseBean=ResponseBean.ok("添加成功");
             }else {
